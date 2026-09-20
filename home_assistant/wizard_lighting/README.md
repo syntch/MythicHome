@@ -71,3 +71,4 @@ To give your son an app-like experience without access to your main smart home c
    * **iOS (Safari):** Tap the Share button $\rightarrow$ tap **Add to Home Screen**.
    * **Android (Chrome):** Tap the 3 dots $\rightarrow$ tap **Install app** or **Add to Home screen**.
    * The dashboard will now launch full-screen with its own fantasy icon, hiding browser address bars!
+
