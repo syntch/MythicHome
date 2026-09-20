@@ -97,6 +97,9 @@ TSOP38238 Pinout (facing the curved lens):
 > [!WARNING]
 > Connect VCC to **3.3V**, not 5V. Supplying 5V to the TSOP output pin will exceed the ESP32's 3.3V GPIO input tolerance and can damage the board.
 
+![ESP32 Breadboard Prototype](breadboard_front.jpg)  
+*ESP32 and TSOP IR receiver wired on a solderless breadboard (see [Hardware Assembly Guide](esp32/hardware_assembly_guide.md)).*
+
 ---
 
 ## 📖 Setup & Deployment Guides
@@ -107,4 +110,7 @@ Step-by-step guides in this directory:
 2. **[Hardware Assembly Guide](esp32/hardware_assembly_guide.md):** Physical wiring, pin tables, and bench testing instructions.
 3. **[Enclosure & Housing Guide](enclosure_housing_guide.md):** Drilling, mounting, and disguising the sensor inside a craft wooden treasure chest.
 4. **[Production Deployment Checklist](esp32/esp32_treasure_box_setup_checklist.md):** Step-by-step verification before placing the node in a room.
+
+![Treasure Chest Sensor Node](treasure_chest_front.jpg)  
+*Disguised treasure chest sensor node with discreet aperture for the IR lens (see [Enclosure Guide](enclosure_housing_guide.md)).*
 

@@ -65,6 +65,14 @@ Look at the small labels printed on your ESP32 board next to the pins:
 
 *Note: If the target ESP32 pin is on the left side of the board, plug a Male wire into **Column a** at that pin's row. If the target ESP32 pin is on the right side of the board, slip a **Female jumper wire header** directly onto the top header pin of the ESP32.*
 
+### Assembly Reference Photos
+
+![ESP32 Breadboard Assembly - Front Perspective](../breadboard_front.jpg)  
+*Figure 1: Front perspective showing the TSOP IR receiver and jumper wire connections.*
+
+![ESP32 Breadboard Assembly - Rear / Side Perspective](../breadboard_back.jpg)  
+*Figure 2: Rear and side perspective showing the ESP32 seated across the central trench.*
+
 ## 5. Verification Checklist
 
 1. \[ \] ESP32 is seated firmly across the trench in **Column B** and **Column J** (Rows 1–15).
