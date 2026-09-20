@@ -107,3 +107,4 @@ Step-by-step guides in this directory:
 2. **[Hardware Assembly Guide](esp32/hardware_assembly_guide.md):** Physical wiring, pin tables, and bench testing instructions.
 3. **[Enclosure & Housing Guide](enclosure_housing_guide.md):** Drilling, mounting, and disguising the sensor inside a craft wooden treasure chest.
 4. **[Production Deployment Checklist](esp32/esp32_treasure_box_setup_checklist.md):** Step-by-step verification before placing the node in a room.
+

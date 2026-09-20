@@ -50,3 +50,4 @@ These components are planned for Phase 4 expansions:
 * For explosive spells like Fireball and Lightning, lighting latency matters.
 * **Zigbee** and **Local Wi-Fi** (e.g. Kasa local or ESPHome) respond in under 50ms, enabling instant flashes and flickers.
 * Cloud-dependent bulbs (Tuya/Smart Life without local control) may introduce noticeable delays.
+

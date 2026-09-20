@@ -52,3 +52,4 @@ Interactive real-time 3D boss encounters streamed directly from your gaming desk
 
 * **Servo-Driven Treasure Chest Latch:** An SG90 micro servo integrated into a wooden chest to physically unlock and pop the lid when a correct spell sequence is cast.
 * **Addressable WS2812B Spell Strips:** Wall-mounted LED strips running WLED or ESP32 firmware to simulate beams of magical energy traveling from the wand sensor to props.
+
