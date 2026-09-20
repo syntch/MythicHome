@@ -64,8 +64,7 @@ Each major subsystem contains its own dedicated documentation and guides:
 ```text
 MythicHome/
 ├── docs/
-│   ├── hardware_bom.md                 # Full Bill of Materials & purchasing guide
-│   └── plan.md                         # Architecture overview & phased roadmap
+│   └── hardware_bom.md                 # Full Bill of Materials & purchasing guide
 ├── home_assistant/
 │   ├── README.md                       # Mosquitto broker setup & automation guide
 │   ├── fireball_spell_automation_guide.md  # Explosive color transitions & delays
