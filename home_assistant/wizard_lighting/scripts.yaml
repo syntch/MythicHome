@@ -1,0 +1,202 @@
+# ==============================================================================
+# MythicHome: Wizard Lighting Fantasy Scene Scripts
+# ==============================================================================
+# Paste these into your Home Assistant scripts.yaml or add each via:
+# Settings -> Automations & Scenes -> Scripts -> Add Script (Edit in YAML)
+#
+# Bulbs Targeted:
+# - Standing Lamp: light.standing_lamp_bulb_1 & light.standing_lamp_bulb_2
+# - Bedside Lamp: light.nightstand_bulb
+# ==============================================================================
+
+wizard_scene_cave:
+  alias: "Wizard Scene: Torchlit Cave"
+  description: "Dim deep stone cavern lighting with a crackling warm torch on the bedside table."
+  icon: mdi:fire
+  mode: restart
+  sequence:
+    # 1. Set Standing Lamps to Dim Midnight Stone
+    - action: light.turn_on
+      target:
+        entity_id:
+          - light.standing_lamp_bulb_1
+          - light.standing_lamp_bulb_2
+      data:
+        rgb_color: [15, 25, 70]
+        brightness_pct: 15
+        transition: 2
+
+    # 2. Dynamic Torch Ignition & Flicker Sequence on Bedside Lamp
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [255, 90, 0]
+        brightness_pct: 45
+        transition: 0.1
+    - delay:
+        milliseconds: 120
+
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [200, 40, 0]
+        brightness_pct: 25
+        transition: 0.1
+    - delay:
+        milliseconds: 100
+
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [255, 140, 20]
+        brightness_pct: 75
+        transition: 0.15
+    - delay:
+        milliseconds: 150
+
+    # 3. Settle on Steady Crackling Torch Flame
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [255, 120, 10]
+        brightness_pct: 65
+        transition: 0.8
+
+wizard_scene_swamp:
+  alias: "Wizard Scene: Poison Swamp"
+  description: "Murky alchemist bog with toxic green ambient light and bubbling purple ooze."
+  icon: mdi:flask-round-poison
+  mode: restart
+  sequence:
+    - action: light.turn_on
+      target:
+        entity_id:
+          - light.standing_lamp_bulb_1
+          - light.standing_lamp_bulb_2
+      data:
+        rgb_color: [30, 200, 30]
+        brightness_pct: 40
+        transition: 2
+
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [180, 0, 255]
+        brightness_pct: 75
+        transition: 2
+
+wizard_scene_forest:
+  alias: "Wizard Scene: Enchanted Forest"
+  description: "Deep emerald tree canopy with a glowing golden fairy wisp at the bedside."
+  icon: mdi:forest
+  mode: restart
+  sequence:
+    - action: light.turn_on
+      target:
+        entity_id:
+          - light.standing_lamp_bulb_1
+          - light.standing_lamp_bulb_2
+      data:
+        rgb_color: [0, 130, 45]
+        brightness_pct: 35
+        transition: 2.5
+
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [255, 215, 100]
+        brightness_pct: 85
+        transition: 2.5
+
+wizard_scene_dragon:
+  alias: "Wizard Scene: Dragon's Caldera"
+  description: "Smoldering volcanic lair with magma crimson walls and blazing gold core."
+  icon: mdi:volcano
+  mode: restart
+  sequence:
+    - action: light.turn_on
+      target:
+        entity_id:
+          - light.standing_lamp_bulb_1
+          - light.standing_lamp_bulb_2
+      data:
+        rgb_color: [200, 15, 0]
+        brightness_pct: 50
+        transition: 1
+
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [255, 180, 0]
+        brightness_pct: 90
+        transition: 0.8
+
+wizard_scene_sanctum:
+  alias: "Wizard Scene: Arcane Crystal Sanctum"
+  description: "High wizard tower powered by astral indigo leylines and electric cyan crystals."
+  icon: mdi:crystal-ball
+  mode: restart
+  sequence:
+    - action: light.turn_on
+      target:
+        entity_id:
+          - light.standing_lamp_bulb_1
+          - light.standing_lamp_bulb_2
+      data:
+        rgb_color: [40, 10, 180]
+        brightness_pct: 30
+        transition: 1.5
+
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [0, 230, 255]
+        brightness_pct: 85
+        transition: 1.5
+
+wizard_scene_lumos:
+  alias: "Wizard Scene: Lumos (Daylight)"
+  description: "Warm, comfortable white light for everyday reading, play, and study."
+  icon: mdi:lightbulb-on
+  mode: restart
+  sequence:
+    - action: light.turn_on
+      target:
+        entity_id:
+          - light.standing_lamp_bulb_1
+          - light.standing_lamp_bulb_2
+          - light.nightstand_bulb
+      data:
+        color_temp_kelvin: 3000
+        brightness_pct: 85
+        transition: 2
+
+wizard_scene_nox:
+  alias: "Wizard Scene: Nox (Sleep)"
+  description: "Standing lamps extinguish completely, leaving a very dim warm ember nightlight."
+  icon: mdi:weather-night
+  mode: restart
+  sequence:
+    - action: light.turn_off
+      target:
+        entity_id:
+          - light.standing_lamp_bulb_1
+          - light.standing_lamp_bulb_2
+      data:
+        transition: 3
+
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [255, 50, 0]
+        brightness_pct: 4
+        transition: 3
