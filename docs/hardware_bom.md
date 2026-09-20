@@ -2,6 +2,10 @@
 
 This document provides a comprehensive list of hardware, electronic components, tools, and materials needed to build the MythicHome interactive environment.
 
+> [!NOTE]
+> **Personal Testing & Purchasing Disclaimer:**  
+> The specific hardware items and links provided in this document are the components I have personally purchased, built with, and verified working in my home setup. They are provided as known-working references—there may be better, cheaper, or alternative options that suit your setup equally well!
+
 ---
 
 ## 📋 Component Overview & Shopping List
