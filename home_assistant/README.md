@@ -45,3 +45,4 @@ The guides in this directory contain copy-pasteable YAML automations and visual 
 * **[Home Assistant Spell Automation Guide](home_assistant_spell_automation_guide.md):** Deep-dive into transition timing, inserting delays, and toggling physical plugs safely.
 * **[Fireball Spell Automation Guide](fireball_spell_automation_guide.md):** A 4-stage explosive sequence: 0.8s charge swell, instant 100% crimson flash, lingering ember desk lamp flickers, and 3-second thermal dissipation.
 * **[Lightning Spell Automation Guide](lightning_spell_automation_guide.md):** Strobe lighting patterns, electric crackles, and instant transitions.
+
