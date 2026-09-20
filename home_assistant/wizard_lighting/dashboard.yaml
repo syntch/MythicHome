@@ -158,3 +158,4 @@ views:
             icon: mdi:floor-lamp-torchiere-outline
             features:
               - type: light-brightness
+
