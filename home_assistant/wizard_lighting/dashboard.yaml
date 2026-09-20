@@ -1,0 +1,160 @@
+# ==============================================================================
+# MythicHome: "Wizard Lighting" Phone Dashboard Configuration
+# ==============================================================================
+# How to apply in Home Assistant:
+# 1. Go to Dashboards -> Select your "Wizard Lighting" Dashboard.
+# 2. Click the 3 dots in the top right -> "Edit Dashboard".
+# 3. Click the 3 dots again -> "Raw configuration editor".
+# 4. Paste the YAML below and click "Save".
+# ==============================================================================
+
+title: "Wizard Lighting"
+views:
+  - title: "Spells"
+    path: "spells"
+    icon: mdi:wand
+    type: sections
+    max_columns: 2
+    sections:
+      - title: "🪄 Fantasy Environments"
+        cards:
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              # --- 1. Torchlit Cave ---
+              - type: button
+                name: "Torchlit Cave"
+                icon: mdi:fire
+                show_name: true
+                show_icon: true
+                icon_height: 48px
+                tap_action:
+                  action: perform-action
+                  perform_action: script.wizard_scene_cave
+                  haptic: heavy
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: linear-gradient(135deg, rgba(255,120,10,0.2), rgba(15,25,70,0.4));
+                      border: 1px solid rgba(255,120,10,0.5);
+                    }
+
+              # --- 2. Poison Swamp ---
+              - type: button
+                name: "Poison Swamp"
+                icon: mdi:flask-round-poison
+                show_name: true
+                show_icon: true
+                icon_height: 48px
+                tap_action:
+                  action: perform-action
+                  perform_action: script.wizard_scene_swamp
+                  haptic: heavy
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: linear-gradient(135deg, rgba(30,200,30,0.2), rgba(180,0,255,0.2));
+                      border: 1px solid rgba(30,200,30,0.5);
+                    }
+
+              # --- 3. Enchanted Forest ---
+              - type: button
+                name: "Enchanted Forest"
+                icon: mdi:forest
+                show_name: true
+                show_icon: true
+                icon_height: 48px
+                tap_action:
+                  action: perform-action
+                  perform_action: script.wizard_scene_forest
+                  haptic: heavy
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: linear-gradient(135deg, rgba(0,130,45,0.25), rgba(255,215,100,0.2));
+                      border: 1px solid rgba(0,130,45,0.5);
+                    }
+
+              # --- 4. Dragon's Caldera ---
+              - type: button
+                name: "Dragon's Caldera"
+                icon: mdi:volcano
+                show_name: true
+                show_icon: true
+                icon_height: 48px
+                tap_action:
+                  action: perform-action
+                  perform_action: script.wizard_scene_dragon
+                  haptic: heavy
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: linear-gradient(135deg, rgba(200,15,0,0.25), rgba(255,180,0,0.2));
+                      border: 1px solid rgba(200,15,0,0.5);
+                    }
+
+              # --- 5. Crystal Sanctum ---
+              - type: button
+                name: "Crystal Sanctum"
+                icon: mdi:crystal-ball
+                show_name: true
+                show_icon: true
+                icon_height: 48px
+                tap_action:
+                  action: perform-action
+                  perform_action: script.wizard_scene_sanctum
+                  haptic: heavy
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: linear-gradient(135deg, rgba(40,10,180,0.25), rgba(0,230,255,0.2));
+                      border: 1px solid rgba(0,230,255,0.5);
+                    }
+
+              # --- 6. Normal Reading / Lumos ---
+              - type: button
+                name: "Lumos (Daylight)"
+                icon: mdi:lightbulb-on
+                show_name: true
+                show_icon: true
+                icon_height: 48px
+                tap_action:
+                  action: perform-action
+                  perform_action: script.wizard_scene_lumos
+                  haptic: medium
+
+              # --- 7. Nox (Sleep / Embers) ---
+              - type: button
+                name: "Nox (Sleep)"
+                icon: mdi:weather-night
+                show_name: true
+                show_icon: true
+                icon_height: 48px
+                tap_action:
+                  action: perform-action
+                  perform_action: script.wizard_scene_nox
+                  haptic: medium
+
+      - title: "💡 Manual Lamp Adjustments"
+        cards:
+          - type: tile
+            entity: light.nightstand_bulb
+            name: "Bedside Lamp"
+            icon: mdi:lamp
+            features:
+              - type: light-brightness
+
+          - type: tile
+            entity: light.standing_lamp_bulb_1
+            name: "Standing Lamp (Upper)"
+            icon: mdi:floor-lamp-torchiere
+            features:
+              - type: light-brightness
+
+          - type: tile
+            entity: light.standing_lamp_bulb_2
+            name: "Standing Lamp (Lower)"
+            icon: mdi:floor-lamp-torchiere-outline
+            features:
+              - type: light-brightness

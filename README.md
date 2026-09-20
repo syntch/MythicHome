@@ -69,7 +69,8 @@ MythicHome/
 │   ├── README.md                       # Mosquitto broker setup & automation guide
 │   ├── fireball_spell_automation_guide.md  # Explosive color transitions & delays
 │   ├── home_assistant_spell_automation_guide.md # Transition timing & toggle logic
-│   └── lightning_spell_automation_guide.md # Rapid flash & strobe sequences
+│   ├── lightning_spell_automation_guide.md # Rapid flash & strobe sequences
+│   └── wizard_lighting/                # Phone dashboard & fantasy scene scripts
 ├── props/
 │   ├── README.md                       # Overview of digital & physical props
 │   ├── magic_picture/
