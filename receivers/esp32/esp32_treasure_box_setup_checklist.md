@@ -2,6 +2,9 @@
 
 Now that your ESP32 board and TSOP4838 IR Receiver are mounted inside your treasure box, follow these steps to flash the firmware and test wand detection.
 
+![Treasure Box Node Interior](../treasure_chest_inside.jpg)  
+*Figure: The ESP32 and TSOP IR receiver mounted inside the treasure box with USB-C power connected.*
+
 ## Step 1: Connect to PC & Verify Driver
 
 1. Connect the ESP32 to your desktop PC using the USB-C cable passing through the rear box hole.

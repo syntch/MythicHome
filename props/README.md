@@ -10,6 +10,9 @@ All props subscribe directly to MQTT topics or are orchestrated by Home Assistan
 
 An old Amazon Kindle Fire tablet mounted on a wall or stand acts as an interactive magical painting that reacts to wand flicks.
 
+![Living Video Portrait Prototype](../receivers/magic_picture_prototype.jpg)  
+*Figure: The Kindle Fire living portrait prototype on a display shelf with the disguised treasure chest receiver.*
+
 * **Technology:** Vanilla HTML5, CSS crossfades, and Paho MQTT over WebSockets (`ws://<YOUR_HOME_ASSISTANT_IP>:1884`).
 * **Display Hardware:** Amazon Fire 7" or 8" tablet using the native **Silk Browser**.
 * **Behavior:** Loops an idle video (`serena_idle.mp4`). When a wand event (`/fireball` or `/wave`) is received over WebSockets, it seamlessly crossfades to a reaction video (`serena_wave.mp4`) and returns smoothly to idle.

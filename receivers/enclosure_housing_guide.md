@@ -62,6 +62,17 @@ These DIY options blend naturally into a room's decor or wizarding theme without
 
   4. Stain or paint with metallic/mythic accents.
 
+#### Treasure Box Enclosure Reference Photos
+
+![Treasure Chest Node - Front Exterior View](treasure_chest_front.jpg)  
+*Figure 1: Exterior front view showing the discreet 5mm drilled aperture for the TSOP IR sensor lens.*
+
+![Treasure Chest Node - Interior Electronics](treasure_chest_inside.jpg)  
+*Figure 2: Interior view showing the ESP32 board, jumper wiring, and sensor mounted inside the craft box.*
+
+![Treasure Chest Node - Rear Power Pass-Through](treasure_chest_back.jpg)  
+*Figure 3: Rear view showing the hole drilled for the USB-C power cable.*
+
 ### 🔮 Frosted Crystal Orb / Potion Bottle
 
 * **Materials:** Frosted plastic potion bottle, craft orb, or acrylic container.

@@ -2,6 +2,11 @@
 
 This guide covers how to set up an Amazon Kindle Fire tablet as an always-on, interactive magic portrait using the native Silk Browser and direct MQTT WebSockets. No sideloading or third-party kiosk apps are required.
 
+![Magic Picture Frame Prototype with Treasure Chest Receiver](../../receivers/magic_picture_prototype.jpg)  
+*Figure: The Kindle Fire living portrait mounted on a shelf alongside the disguised treasure chest sensor node.*
+
+---
+
 ## 1. Keep the Screen Awake (Developer Options)
 
 Fire tablets aggressively put the screen to sleep. We must override this so the portrait never turns off while mounted on the wall/stand.
