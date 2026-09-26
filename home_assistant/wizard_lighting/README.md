@@ -20,10 +20,24 @@ Each environment orchestrates the room's **standing lamp** (2 smart bulbs) for a
 
 ---
 
-## 📁 Included Files
+## 🛠️ Hardware & Bill of Materials
 
-* **[`scripts.yaml`](scripts.yaml):** Ready-to-paste Home Assistant YAML script definitions.
-* **[`dashboard.yaml`](dashboard.yaml):** Ready-to-paste Lovelace Dashboard YAML with 2-column mobile button grid, custom visual accents, and manual brightness tiles.
+> [!NOTE]
+> **Personal Testing & Purchasing Disclaimer:**  
+> The specific hardware items and links provided below are the components I have personally purchased, built with, and verified working in my home setup. They are provided as known-working references—there may be better, cheaper, or alternative options that suit your setup equally well!
+
+| Component | Category | Purpose | Recommended Model / Specs | Notes & Purchasing Examples |
+| :--- | :--- | :--- | :--- | :--- |
+| **Smart RGB Bulbs - Bright (x2)** | Physical Prop | Standing lamp / room-scale ambient scene & spell lighting | Zigbee / Wi-Fi Color Bulbs (Philips Hue, Kasa, Sengled, Govee) | [Bright Smart Color Bulbs](https://www.amazon.com/dp/B0964DN9TV?th=1). Ensure local Home Assistant integration support. |
+| **Smart RGB Bulb - Table (x1)** | Physical Prop | Bedside table lamp focal point (Torch flicker, cauldron glow, nightlight) | Zigbee / Wi-Fi Color Bulbs (Philips Hue, Kasa, Sengled, Govee) | [Smart Color Bulbs](https://www.amazon.com/dp/B08TB6VXFL?th=1). Ensure local Home Assistant integration support. |
+| **Mobile Device** | Controller | Runs the Home Assistant Companion App or browser PWA | Any iOS or Android phone / tablet | Configured with a dedicated non-admin user profile defaulted to the `Wizard Lighting` dashboard. |
+
+---
+
+## 📁 Included Configuration Files
+
+* **[`scripts.yaml`](scripts.yaml):** Ready-to-paste Home Assistant YAML script definitions for all 7 environments.
+* **[`dashboard.yaml`](dashboard.yaml):** Ready-to-paste Lovelace Dashboard YAML with a 2-column mobile button grid, custom gradient card accents, haptic feedback, and manual brightness sliders.
 
 ---
 
@@ -39,7 +53,7 @@ Choose either method:
   1. Go to **Settings → Automations & Scenes → Scripts**.
   2. Click **Add Script**.
   3. Click the 3 dots in the top right corner and choose **Edit in YAML**.
-  4. Paste one of the script blocks from `scripts.yaml`, name it, and save.
+  4. Paste one of the script blocks from **[`scripts.yaml`](scripts.yaml)**, name it, and save.
 
 > [!TIP]
 > If your bulb entity IDs differ from `light.standing_lamp_bulb_1`, `light.standing_lamp_bulb_2`, or `light.nightstand_bulb`, do a quick find-and-replace in `scripts.yaml` before saving.
@@ -48,27 +62,27 @@ Choose either method:
 
 ### Step 2: Configure the Dashboard
 
-1. In Home Assistant, open your **"Wizard Lighting"** dashboard.
-2. Click the **Pencil icon** (or 3 dots in top right $\rightarrow$ **Edit Dashboard**).
-3. Click the 3 dots in the top right again $\rightarrow$ select **Raw configuration editor**.
-4. Replace the contents with the YAML from **[`dashboard.yaml`](dashboard.yaml)**.
-5. Click **Save** and exit the editor.
+1. In Home Assistant, go to **Settings → Dashboards → Add Dashboard** and create a new empty dashboard titled **"Wizard Lighting"** (with icon `mdi:wand`).
+2. Open the new **"Wizard Lighting"** dashboard.
+3. Click the **Pencil icon** in the top right (Edit Dashboard).
+4. Click the **3 dots** in the top right again $\rightarrow$ select **Raw configuration editor**.
+5. Replace the entire contents with the YAML from **[`dashboard.yaml`](dashboard.yaml)**.
+6. Click **Save** and exit the editor.
 
 ---
 
 ### Step 3: Configure Your Son's Phone
 
-To give your son an app-like experience without access to your main smart home controls:
+To give your son an app-like experience without exposing your main smart home settings:
 
 1. **Create a Dedicated User (Recommended):**
    * Go to **Settings → People → Users → Add User**.
-   * Create a username (e.g., `wizard` or his name) with standard (non-admin) permissions.
+   * Create a username (e.g., `wizard` or his name) and toggle **Local access only** and **Non-admin** permissions.
 2. **Set Default Dashboard:**
    * Log into Home Assistant on his phone using his account.
-   * Tap his profile picture/icon in the bottom-left sidebar.
+   * Tap his profile icon in the bottom-left sidebar.
    * Under **Dashboard**, set the default dashboard to **"Wizard Lighting"**.
-3. **Add to Home Screen (Progressive Web App):**
-   * **iOS (Safari):** Tap the Share button $\rightarrow$ tap **Add to Home Screen**.
-   * **Android (Chrome):** Tap the 3 dots $\rightarrow$ tap **Install app** or **Add to Home screen**.
-   * The dashboard will now launch full-screen with its own fantasy icon, hiding browser address bars!
-
+3. **Add to Home Screen (Progressive Web App / Companion App):**
+   * **Home Assistant Companion App:** Install from the App Store / Google Play Store for instant loading and native haptic feedback.
+   * **Browser PWA (iOS Safari):** Tap the Share button $\rightarrow$ tap **Add to Home Screen**.
+   * **Browser PWA (Android Chrome):** Tap the 3 dots $\rightarrow$ tap **Install app** or **Add to Home screen**.

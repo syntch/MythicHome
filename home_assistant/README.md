@@ -38,12 +38,36 @@ Creating convincing magical effects with smart lights requires understanding how
 
 ---
 
-## 📖 Automation Guides
+## 📖 Spell Automation Guides (Wand Triggered)
 
-The guides in this directory contain copy-pasteable YAML automations and visual editor instructions:
+The guides in this directory contain copy-pasteable YAML automations and visual editor instructions for wand-triggered effects:
 
 * **[Home Assistant Spell Automation Guide](home_assistant_spell_automation_guide.md):** Deep-dive into transition timing, inserting delays, and toggling physical plugs safely.
 * **[Fireball Spell Automation Guide](fireball_spell_automation_guide.md):** A 4-stage explosive sequence: 0.8s charge swell, instant 100% crimson flash, lingering ember desk lamp flickers, and 3-second thermal dissipation.
 * **[Lightning Spell Automation Guide](lightning_spell_automation_guide.md):** Strobe lighting patterns, electric crackles, and instant transitions.
-* **[Wizard Lighting Mobile Dashboard](wizard_lighting/README.md):** 7 interactive fantasy lighting scenes (Torchlit Cave, Poison Swamp, Enchanted Forest, etc.) and a phone-optimized Lovelace dashboard for young wizards.
+
+---
+
+## 📱 Mobile Dashboard: Wizard Lighting (`wizard_lighting/`)
+
+In addition to wand-cast reactions, MythicHome includes a phone-optimized Lovelace dashboard (**"Wizard Lighting"**) designed for a phone or tablet so young wizards can change their room's ambient fantasy mood at any time with a tap.
+
+* **[Wizard Lighting Setup Guide](wizard_lighting/README.md):** Complete overview of the 7 fantasy lighting scenes (*Torchlit Cave*, *Poison Swamp*, *Enchanted Forest*, *Dragon's Caldera*, *Crystal Sanctum*, *Lumos*, and *Nox*) and phone PWA setup instructions.
+* **[`wizard_lighting/scripts.yaml`](wizard_lighting/scripts.yaml):** Home Assistant script definitions driving the room's standing lamp and bedside table lamp.
+* **[`wizard_lighting/dashboard.yaml`](wizard_lighting/dashboard.yaml):** Lovelace 2-column mobile button grid with custom visual accents and manual brightness sliders.
+
+---
+
+## 🛠️ Smart Lighting & Plugs Bill of Materials
+
+> [!NOTE]
+> **Personal Testing & Purchasing Disclaimer:**  
+> The specific hardware items and links provided in this document are the components I have personally purchased, built with, and verified working in my home setup. They are provided as known-working references—there may be better, cheaper, or alternative options that suit your setup equally well!
+
+| Component | Category | Purpose | Recommended Model / Specs | Notes & Purchasing Examples |
+| :--- | :--- | :--- | :--- | :--- |
+| **Smart RGB Bulbs - Bright** | Physical Prop | Standing lamp / room-scale spell & scene lighting effects | Zigbee / Wi-Fi Color Bulbs (Philips Hue, Kasa, Sengled, Govee) | [Bright Smart Color Bulbs](https://www.amazon.com/dp/B0964DN9TV?th=1). Ensure local Home Assistant integration support. |
+| **Smart RGB Bulbs - Table** | Physical Prop | Bedside table lamp focal point & spell effects | Zigbee / Wi-Fi Color Bulbs (Philips Hue, Kasa, Sengled, Govee) | [Smart Color Bulbs](https://www.amazon.com/dp/B08TB6VXFL?th=1). Ensure local Home Assistant integration support. |
+| **Smart Plugs** | Physical Prop | Switching themed lamps, blacklights, or noise machines | Zigbee / Wi-Fi Smart Plugs (Sonoff, Kasa, TP-Link, ThirdReality) | [Smart Plugs](https://www.amazon.com/dp/B091FXQQMQ?th=1). |
+
 
