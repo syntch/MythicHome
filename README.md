@@ -11,6 +11,7 @@ MythicHome bridges the physical and digital worlds: flick your wand to trigger r
 * **Decoupled Architecture:** Sensor nodes (inputs) detect wand flicks independently and publish standard JSON events over MQTT. Digital and physical props (outputs) subscribe and react autonomously.
 * **Flick Magnitude & Spell Classification:** MicroPython decodes the raw 48-bit MagiQuest IR pulse protocol, distinguishing between subtle flicks (**Lightning**) and forceful casts (**Fireball**).
 * **Home Assistant Integration:** Coordinates spell cooldowns, triggers smart plugs and bulbs, and sequences complex light transitions with ember flickers and cool-downs.
+* **Wizard Lighting Mobile Dashboard:** A kid-friendly, phone-optimized Lovelace dashboard with 7 fantasy bedroom environments (*Torchlit Cave*, *Poison Swamp*, *Enchanted Forest*, *Dragon's Caldera*, *Crystal Sanctum*, *Lumos*, and *Nox*).
 * **Interactive 3D Boss Battles (Unity + Moonlight):** A complete Unity boss encounter featuring health bars, spell particle VFX, sound effects, and auto-reset, streamed from a host PC to any TV or projector via Sunshine/Moonlight.
 * **Living Video Portrait Frame:** An always-on Amazon Kindle Fire tablet running a lightweight HTML5/JavaScript web app that seamlessly crossfades between idle and reaction video clips over direct MQTT WebSockets.
 
@@ -20,14 +21,15 @@ MythicHome bridges the physical and digital worlds: flick your wand to trigger r
 
 ```mermaid
 flowchart TD
-    subgraph SensorNodes["Sensor Nodes (Inputs)"]
+    subgraph Inputs["Inputs & Controllers"]
         ESP32["ESP32 + TSOP38238 IR Receiver<br/><i>(Wand Detection)</i>"]
+        Phone["Mobile / Phone Dashboard<br/><i>('Wizard Lighting' Scenes)</i>"]
     end
 
     subgraph CentralServer["Central Server (Host PC)"]
         subgraph HomeAssistant["Home Assistant"]
             MQTT["Mosquitto MQTT Broker<br/><i>(Ports 1883 & 1884 WS)</i>"]
-            Automations["Spell Automations & State"]
+            Automations["Spell Automations & Scripts"]
             WebServer["Local Web Server<br/><i>(/config/www/)</i>"]
         end
         Sunshine["Sunshine Game Streamer<br/><i>(Host Streaming Server)</i>"]
@@ -45,6 +47,7 @@ flowchart TD
 
     %% Data Flow
     ESP32 -- "Wi-Fi (MQTT Cast Events)" --> MQTT
+    Phone -- "Wi-Fi (Lovelace UI)" --> Automations
     MQTT --> Automations
     Automations --> Bulbs
     Automations --> Plugs
@@ -130,11 +133,11 @@ Follow the **[Receivers Guide](receivers/README.md)** to:
 3. Configure your Wi-Fi and MQTT credentials in `dual_spell_mqtt_publisher.py`.
 4. Assemble the board into a craft treasure box enclosure.
 
-### Step 2: Configure Home Assistant & MQTT Broker
-Follow the **[Home Assistant Guide](home_assistant/README.md)** to:
+### Step 2: Configure Home Assistant & Lighting
+Follow the **[Home Assistant Guide](home_assistant/README.md)** and **[Wizard Lighting Guide](home_assistant/wizard_lighting/README.md)** to:
 1. Install the Mosquitto broker add-on with ports `1883` (TCP) and `1884` (WebSockets) active.
-2. Import the YAML lighting automations for Fireball and Lightning effects.
-3. Link your physical smart bulbs and smart plugs.
+2. Import the YAML lighting automations for Fireball and Lightning wand effects.
+3. Set up the **[Wizard Lighting Mobile Dashboard](home_assistant/wizard_lighting/README.md)** (`scripts.yaml` & `dashboard.yaml`) for one-tap fantasy bedroom scenes on a phone.
 
 ### Step 3: Deploy Props
 Follow the **[Props Guide](props/README.md)** to:
@@ -152,10 +155,11 @@ Follow the **[Props Guide](props/README.md)** to:
 - [x] **Phase 2: Debounce & Physical Enclosure**
   - 3-second cooldown debounce logic.
   - Wooden treasure box sensor housing.
-- [x] **Phase 3: Digital Encounters**
+- [x] **Phase 3: Digital Encounters & Scene Controllers**
   - Unity Dragon combat prototype with live MQTT spell damage.
   - Kindle Fire "Living Portrait" HTML5 client over WebSockets.
   - Sunshine/Moonlight streaming integration.
+  - Phone-optimized "Wizard Lighting" bedroom scene dashboard.
 - [ ] **Phase 4: Advanced Actuators & Multi-Node Quests (Upcoming)**
   - Servo-driven treasure chest lock/unlock mechanism.
   - Addressable WS2812B LED spell beam strips across walls.

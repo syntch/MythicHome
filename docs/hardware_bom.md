@@ -21,7 +21,6 @@ This is in process of being split into the appropriate guides.
 | **Smart Plugs** | Physical Prop | Switching themed lamps, blacklights, or noise machines | Zigbee / Wi-Fi Smart Plugs (Sonoff, Kasa, TP-Link, ThirdReality) | [Smart Plugs](https://www.amazon.com/dp/B091FXQQMQ?th=1). |
 | **Central Host Machine** | Server | Runs Home Assistant, Mosquitto, and Unity Boss fight | Desktop PC / Home Server (Windows / Linux) with dedicated GPU | Existing gaming PC or dedicated mini-PC (e.g. Intel N100) running Home Assistant OS / Container. |
 | **Display Client** | Digital Prop | Streaming Unity 3D boss encounters to big screen | TV with Moonlight client (Fire TV stick, Apple TV, Nvidia Shield, PC, etc.) | [onn. 4K Streaming Device with Google TV](https://www.amazon.com/dp/B0GRCYGS64) or any device running the Moonlight app. |
-| **Display Client** | Digital Prop | Streaming Unity 3D boss encounters to big screen | TV with Moonlight client (Fire TV stick, Apple TV, Nvidia Shield, PC, etc.) | [onn. 4K Streaming Device with Google TV](https://www.amazon.com/dp/B0GRCYGS64) or any device running the Moonlight app. |
 | **Projector** | Digital Prop | Streaming Unity 3D boss encounters to big screen | Projector compatible with the streaming device | The projector I purchased I don't recommend. Look for one that you can turn on remotely via Home Assistant or smart plug. |
 
 ---
