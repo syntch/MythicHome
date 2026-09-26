@@ -86,3 +86,22 @@ Look at the small labels printed on your ESP32 board next to the pins:
 5. \[ \] Sensor **Pin 2 (GND / Row 26)** connects to ESP32 **GND**.
 
 6. \[ \] Sensor **Pin 1 (OUT / Row 25)** connects to ESP32 **GPIO 18** (`D18`).
+
+## 6. Bill of Materials
+
+This document provides a comprehensive list of hardware, electronic components, tools, and materials needed to build the IR receiver.
+
+> [!NOTE]
+> **Personal Testing & Purchasing Disclaimer:**  
+> The specific hardware items and links provided in this document are the components I have personally purchased, built with, and verified working in my home setup. They are provided as known-working references—there may be better, cheaper, or alternative options that suit your setup equally well!
+
+## 📋 Component Overview & Shopping List
+
+| Component | Category | Purpose | Recommended Model / Specs | Notes & Purchasing Examples |
+| :--- | :--- | :--- | :--- | :--- |
+| **ESP32 Dev Board** | Sensor Node | MicroPython microcontroller for IR decoding & MQTT | ESP32-WROOM-32 DevKit V1 (30-pin or 38-pin) | [ESP32 Dev Boards](https://www.amazon.com/dp/B0CR5Y2JVD?th=1) Micro-USB or USB-C. |
+| **IR Receiver Module** | Sensor Node | 38kHz demodulating infrared receiver | TSOP38238 or VS1838B (38kHz carrier frequency) | [TSOP4838 IR Receiver](https://www.amazon.com/dp/B09BTD69C3). Avoid non-demodulated IR photodiodes. |
+| **Jumper Wires & Breadboard** | Prototyping | Connecting sensors to ESP32 for bench testing | Female-to-Female & Male-to-Female Dupont wires (20cm) | [Breadboard and Jumper Wire Kit](https://www.amazon.com/dp/B0FD7LTSK6?th=1). |
+| **Right Angle USB-C Cables** | Reciever | Connecting the IR reciever ESP32 to power or computer for flashing/updating | USB-A to USB-C cable | [USB-C Right Angle Cable](https://www.amazon.com/dp/B0CFZRYFZB?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) |
+| **Sensor Enclosure** | Themed Prop | Hiding electronics in a fantasy-themed housing | Small unfinished wooden craft treasure chest (approx. 4"x3"x3") | [Wooden Craft Treasure Boxes](https://www.amazon.com/dp/B0BG9R5VKJ) or craft stores like Michaels / Hobby Lobby. |
+| **Tape** | ESP32 anchor | Provide an anchor for the ESP32 module. | Thick tape. Does not need to be double sided. Press the ESP32 "legs" into the tape to anchor it to the bottom of the chest. | [Thick Tape](https://www.amazon.com/dp/B0DCC7Y3GP?th=1) |

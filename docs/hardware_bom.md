@@ -1,6 +1,7 @@
 # 🛠️ MythicHome: Hardware & Bill of Materials (BOM)
 
 This document provides a comprehensive list of hardware, electronic components, tools, and materials needed to build the MythicHome interactive environment.
+This is in process of being split into the appropriate guides.
 
 > [!NOTE]
 > **Personal Testing & Purchasing Disclaimer:**  
@@ -13,11 +14,6 @@ This document provides a comprehensive list of hardware, electronic components, 
 | Component | Category | Purpose | Recommended Model / Specs | Notes & Purchasing Examples |
 | :--- | :--- | :--- | :--- | :--- |
 | **MagiQuest Wand** | Controller | Infrared spell transmitter | Any authentic MagiQuest wand (Great Wolf Lodge or Creative Kingdoms) | Purchase on-site at Great Wolf Lodge. Standard 38kHz IR. |
-| **ESP32 Dev Board** | Sensor Node | MicroPython microcontroller for IR decoding & MQTT | ESP32-WROOM-32 DevKit V1 (30-pin or 38-pin) | [ESP32 Dev Boards](https://www.amazon.com/dp/B0CR5Y2JVD?th=1) Micro-USB or USB-C. |
-| **IR Receiver Module** | Sensor Node | 38kHz demodulating infrared receiver | TSOP38238 or VS1838B (38kHz carrier frequency) | [TSOP4838 IR Receiver](https://www.amazon.com/dp/B09BTD69C3). Avoid non-demodulated IR photodiodes. |
-| **Jumper Wires & Breadboard** | Prototyping | Connecting sensors to ESP32 for bench testing | Female-to-Female & Male-to-Female Dupont wires (20cm) | [Breadboard and Jumper Wire Kit](https://www.amazon.com/dp/B0FD7LTSK6?th=1). |
-| **Right Angle USB-C Cables** | Reciever | Connecting the IR reciever ESP32 to power or computer for flashing/updating | USB-A to USB-C cable | [USB-C Right Angle Cable](https://www.amazon.com/dp/B0CFZRYFZB?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) |
-| **Sensor Enclosure** | Themed Prop | Hiding electronics in a fantasy-themed housing | Small unfinished wooden craft treasure chest (approx. 4"x3"x3") | [Wooden Craft Treasure Boxes](https://www.amazon.com/dp/B0BG9R5VKJ) or craft stores like Michaels / Hobby Lobby. |
 | **Living Portrait Display** | Digital Prop | Always-on interactive video picture frame | Amazon Fire 7" or 8" Tablet (7th Gen or newer) | [Amazon Fire Tablet](https://www.amazon.com/s?k=fire+tablet) (I used an older model which works great). Any tablet with a modern browser will work. |
 | **Tablet Wall Mount / Stand** | Digital Prop | Mounting the portrait on a wall or bookshelf | Acrylic picture frame stand or low-profile wall mount | [Amazon Tablet Stand](https://www.amazon.com/s?k=tablet+stand+holder) or wooden picture easel. I have not personally tried this yet. |
 | **Smart RGB Bulbs - Bright** | Physical Prop | Standing lamp / room scale spell lighting effects (Fireball/Lightning) | Zigbee / Wi-Fi Color Bulbs (Philips Hue, Kasa, Sengled, Govee) | [Bright Smart Color Bulbs](https://www.amazon.com/dp/B0964DN9TV?th=1). Ensure local Home Assistant integration support. |
