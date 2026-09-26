@@ -24,23 +24,18 @@ An old Amazon Kindle Fire tablet mounted on a wall or stand acts as an interacti
 
 ## 🐉 Digital Prop: 3D Boss Battles via Moonlight (`unity_scenes/`)
 
-Interactive real-time 3D boss encounters streamed directly from your gaming desktop to any television, projector, or streaming device.
+Interactive real-time 3D boss encounters streamed directly from your gaming desktop to any television, projector, or streaming device. Both scenes live inside a single shared Unity project and compile into separate standalone executables.
 
 * **Technology:** Unity 3D Engine + `M2Mqtt` + **Sunshine** (host streamer) + **Moonlight** (client receiver).
-* **Display Hardware:** Any TV or projector connected to an Apple TV, Fire TV Stick 4K, Nvidia Shield, or mini PC running the Moonlight client.
-* **Gameplay Mechanics:**
-  * Subscribes to `mythichome/events/cast/#` directly over TCP port 1883.
-  * Each registered spell hit applies damage to the boss, updates the on-screen health bar, and triggers synchronized particle VFX and audio roars.
-  * When health drops to 0, the boss plays a death animation and displays a victory screen.
-  * Any subsequent wand cast instantly reloads the scene for the next adventurer.
-  * Sunshine "Undo Commands" automatically terminate the Unity process when the Moonlight stream disconnects.
-* **C# Scripts in [`unity_scenes/Scripts/`](unity_scenes/Scripts/):**
-  * **`DragonCombatManager.cs`:** Health state, UI slider updates, death logic, and scene resets.
-  * **`DragonSpellReceiver.cs`:** `M2Mqtt` client handling connection, topic subscriptions, and spell routing.
-  * **`DragonAudioEvents.cs`:** Animation-synchronized sound triggers (roars, footfalls).
-  * **`UnityMainThreadDispatcher.cs`:** Thread-safe bridge routing background MQTT events to Unity's main thread.
-  * **`RandomScreamBehaviour.cs`:** State machine variation to randomize idle behaviors.
-  * **`FrameLimiter.cs`:** Optimizes host GPU/CPU utilization during standby.
+* **Display Hardware:** Any TV or projector connected to an Apple TV, Fire TV Stick 4K, Nvidia Shield, onn. 4K Streaming Box, or mini PC running the Moonlight client.
+* **Encounter 1: Meadow Dragon (`Scripts/DragonCombatManager.cs` & `DragonSpellReceiver.cs`):**
+  * Flick-speed combat: Light flicks cast **Lightning**, heavy flicks cast **Fireball**.
+  * Depletes the Dragon's health bar, triggers hit VFX/SFX, plays death animation at 0 HP, and reloads on the next wand cast.
+* **Encounter 2: Cavern Dragon Tactical Fight (`Scripts/CavernBattle/`):**
+  * **Phone Spellbook + Wand Cast:** Players tap a spell button on their phone dashboard (`🔥 Fireball`, `⚡ Lightning`, `❄️ Ice Spear`, or `🛡️ Arcane Shield`) to load that spell into their wand, then flick the wand to fire!
+  * **Dragon Flame Armor & Shield Breaker:** The Dragon periodically summons an impenetrable shield. Normal attacks bounce off until the player equips and casts **❄️ Ice Spear** to shatter it!
+  * **Dragon Breath Telegraph & Player Shield:** The Dragon winds up fiery breath attacks with an on-screen countdown warning. The player must equip and cast **🛡️ Arcane Shield** in time to block the damage!
+  * **[Cavern Dragon & Multi-Executable Setup Guide](unity_scenes/cavern_dragon_setup_guide.md):** Full instructions for scene setup and one-click dual `.exe` building (`MultiSceneBuilder.cs`).
 
 ---
 

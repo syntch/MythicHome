@@ -20,6 +20,19 @@ Each environment orchestrates the room's **standing lamp** (2 smart bulbs) for a
 
 ---
 
+## ⚔️ Tab 2: Battle Spellbook (For Unity Cavern Dragon Encounter)
+
+The dashboard includes a second tab (**"Battle Spellbook"**) that turns the phone into a tactical spell selector during the **[Unity Cavern Dragon Boss Battle](../../props/unity_scenes/cavern_dragon_setup_guide.md)**. Tapping a spell publishes the selection over MQTT (`mythichome/player/spell_select`) and shifts the bedside lamp to the element's color:
+
+| Spell Button | MQTT Payload | Bedside Lamp Glow | Combat Effect when Wand is Flicked |
+| :--- | :--- | :--- | :--- |
+| **🔥 Fireball** | `"fireball"` | Flame Orange (`[255, 70, 0]`) | Deals **2–3 Heavy Damage** (deflected if Dragon Shield is active) |
+| **⚡ Lightning Bolt** | `"lightning"` | Electric Gold (`[255, 230, 0]`) | Deals **1–2 Fast Damage** (deflected if Dragon Shield is active) |
+| **❄️ Ice Spear** | `"ice_spear"` | Frost Cyan (`[0, 225, 255]`) | **Shatters the Dragon's Flame Shield** + deals 1 Piercing Damage |
+| **🛡️ Arcane Shield** | `"shield"` | Emerald Ward (`[50, 255, 130]`) | Raises a protective barrier for **6s** to block incoming Dragon Breath |
+
+---
+
 ## 🛠️ Hardware & Bill of Materials
 
 > [!NOTE]
