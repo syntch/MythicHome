@@ -1,5 +1,5 @@
 # ==============================================================================
-# MythicHome: "Wizard Lighting" Phone Dashboard Configuration
+# MythicHome: "Wizard Lighting & Battle Spellbook" Phone Dashboard
 # ==============================================================================
 # How to apply in Home Assistant:
 # 1. Go to Dashboards -> Select your "Wizard Lighting" Dashboard.
@@ -10,7 +10,10 @@
 
 title: "Wizard Lighting"
 views:
-  - title: "Spells"
+  # ============================================================================
+  # TAB 1: ROOM AMBIENT FANTASY SCENES
+  # ============================================================================
+  - title: "Room Scenes"
     path: "spells"
     icon: mdi:wand
     type: sections
@@ -159,3 +162,95 @@ views:
             features:
               - type: light-brightness
 
+  # ============================================================================
+  # TAB 2: BATTLE SPELLBOOK (CAVERN DRAGON BOSS ENCOUNTER)
+  # ============================================================================
+  - title: "Battle Spellbook"
+    path: "spellbook"
+    icon: mdi:book-open-page-variant
+    type: sections
+    max_columns: 2
+    sections:
+      - title: "⚔️ Tap to Load Spell into Wand"
+        cards:
+          - type: markdown
+            content: >
+              **Cavern Dragon Combat:** Tap a spell below to load it into your wand, then **flick your MagiQuest wand** at the sensor!
+              * Use **❄️ Ice Spear** when the Dragon casts its Flame Armor.
+              * Use **🛡️ Arcane Shield** when the Dragon winds up its breath attack!
+
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              # --- Spell 1: Fireball ---
+              - type: button
+                name: "🔥 Fireball (Heavy DMG)"
+                icon: mdi:fire-circle
+                show_name: true
+                show_icon: true
+                icon_height: 56px
+                tap_action:
+                  action: perform-action
+                  perform_action: script.equip_spell_fireball
+                  haptic: heavy
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: linear-gradient(135deg, rgba(255,70,0,0.35), rgba(180,20,0,0.25));
+                      border: 2px solid rgba(255,100,0,0.8);
+                    }
+
+              # --- Spell 2: Lightning Bolt ---
+              - type: button
+                name: "⚡ Lightning (Fast Strike)"
+                icon: mdi:flash
+                show_name: true
+                show_icon: true
+                icon_height: 56px
+                tap_action:
+                  action: perform-action
+                  perform_action: script.equip_spell_lightning
+                  haptic: heavy
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: linear-gradient(135deg, rgba(255,230,0,0.3), rgba(100,120,0,0.25));
+                      border: 2px solid rgba(255,230,0,0.8);
+                    }
+
+              # --- Spell 3: Ice Spear (Shield Breaker) ---
+              - type: button
+                name: "❄️ Ice Spear (Break Shield)"
+                icon: mdi:snowflake
+                show_name: true
+                show_icon: true
+                icon_height: 56px
+                tap_action:
+                  action: perform-action
+                  perform_action: script.equip_spell_ice_spear
+                  haptic: heavy
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: linear-gradient(135deg, rgba(0,225,255,0.35), rgba(0,80,180,0.3));
+                      border: 2px solid rgba(0,225,255,0.9);
+                    }
+
+              # --- Spell 4: Arcane Shield (Defense) ---
+              - type: button
+                name: "🛡️ Arcane Shield (Block)"
+                icon: mdi:shield-sun
+                show_name: true
+                show_icon: true
+                icon_height: 56px
+                tap_action:
+                  action: perform-action
+                  perform_action: script.equip_spell_shield
+                  haptic: heavy
+                card_mod:
+                  style: |
+                    ha-card {
+                      background: linear-gradient(135deg, rgba(50,255,130,0.35), rgba(0,120,60,0.3));
+                      border: 2px solid rgba(50,255,130,0.9);
+                    }

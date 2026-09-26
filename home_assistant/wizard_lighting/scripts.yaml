@@ -1,5 +1,5 @@
 # ==============================================================================
-# MythicHome: Wizard Lighting Fantasy Scene Scripts
+# MythicHome: Wizard Lighting Fantasy Scene & Battle Spellbook Scripts
 # ==============================================================================
 # Paste these into your Home Assistant scripts.yaml or add each via:
 # Settings -> Automations & Scenes -> Scripts -> Add Script (Edit in YAML)
@@ -8,6 +8,10 @@
 # - Standing Lamp: light.standing_lamp_bulb_1 & light.standing_lamp_bulb_2
 # - Bedside Lamp: light.nightstand_bulb
 # ==============================================================================
+
+# ------------------------------------------------------------------------------
+# PART 1: ROOM AMBIENT FANTASY SCENES
+# ------------------------------------------------------------------------------
 
 wizard_scene_cave:
   alias: "Wizard Scene: Torchlit Cave"
@@ -201,3 +205,84 @@ wizard_scene_nox:
         brightness_pct: 4
         transition: 3
 
+# ------------------------------------------------------------------------------
+# PART 2: BATTLE SPELLBOOK EQUIP SCRIPTS (FOR CAVERN DRAGON BOSS FIGHT)
+# ------------------------------------------------------------------------------
+# Publishes the active spell to Unity over MQTT ("mythichome/player/spell_select")
+# and tints the bedside table lamp to match the elemental energy loaded into the wand!
+
+equip_spell_fireball:
+  alias: "Spellbook: Equip Fireball"
+  description: "Loads Fireball into the wand for the Unity Cavern Dragon battle and glows flame orange."
+  icon: mdi:fire-circle
+  mode: restart
+  sequence:
+    - action: mqtt.publish
+      data:
+        topic: mythichome/player/spell_select
+        payload: "fireball"
+        retain: true
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [255, 70, 0]
+        brightness_pct: 80
+        transition: 0.4
+
+equip_spell_lightning:
+  alias: "Spellbook: Equip Lightning Bolt"
+  description: "Loads Lightning Bolt into the wand for the Unity Cavern Dragon battle and glows electric yellow."
+  icon: mdi:flash
+  mode: restart
+  sequence:
+    - action: mqtt.publish
+      data:
+        topic: mythichome/player/spell_select
+        payload: "lightning"
+        retain: true
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [255, 230, 0]
+        brightness_pct: 85
+        transition: 0.4
+
+equip_spell_ice_spear:
+  alias: "Spellbook: Equip Ice Spear (Shield Breaker)"
+  description: "Loads Ice Spear into the wand to shatter the Dragon's Shield and glows frost cyan."
+  icon: mdi:snowflake
+  mode: restart
+  sequence:
+    - action: mqtt.publish
+      data:
+        topic: mythichome/player/spell_select
+        payload: "ice_spear"
+        retain: true
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [0, 225, 255]
+        brightness_pct: 85
+        transition: 0.4
+
+equip_spell_shield:
+  alias: "Spellbook: Equip Arcane Shield (Defense)"
+  description: "Loads Arcane Shield into the wand to block incoming Dragon attacks and glows emerald green."
+  icon: mdi:shield-sun
+  mode: restart
+  sequence:
+    - action: mqtt.publish
+      data:
+        topic: mythichome/player/spell_select
+        payload: "shield"
+        retain: true
+    - action: light.turn_on
+      target:
+        entity_id: light.nightstand_bulb
+      data:
+        rgb_color: [50, 255, 130]
+        brightness_pct: 80
+        transition: 0.4
