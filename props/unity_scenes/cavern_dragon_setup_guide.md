@@ -66,6 +66,12 @@ You can test the entire combat loop inside Unity Play Mode even without picking 
 * Press **`4`** $\rightarrow$ Equip **🛡️ Arcane Shield** (Blocks Dragon Breath!)
 * Press **`Spacebar`** $\rightarrow$ Simulate a **MagiQuest Wand Cast**!
 
+> [!TIP]
+> **Input System Compatibility ("InvalidOperationException"):**  
+> If Unity throws an error saying *"You are trying to read Input using the UnityEngine.Input class, but you have switched active Input handling to Input System package"*, go to:  
+> **`Edit -> Project Settings -> Player -> Other Settings -> Configuration`**  
+> Set **`Active Input Handling`** to **`Both`** and restart the Unity Editor. This ensures both modern packages and third-party asset packs (like `IdyllicFantasyNature` camera and movement scripts) work seamlessly together without errors.
+
 ---
 
 ## 4. Building Two Separate Executables (`MeadowDragon.exe` & `CavernDragon.exe`)
