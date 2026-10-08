@@ -3,6 +3,9 @@ using System.Text;
 using UnityEngine;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 public class CavernSpellReceiver : MonoBehaviour
 {
@@ -48,11 +51,23 @@ public class CavernSpellReceiver : MonoBehaviour
         // Built-in keyboard shortcuts for quick testing inside the Unity Editor
         if (combatManager == null) return;
 
+#if ENABLE_INPUT_SYSTEM
+        var keyboard = Keyboard.current;
+        if (keyboard != null)
+        {
+            if (keyboard.digit1Key.wasPressedThisFrame) combatManager.SelectSpell("fireball");
+            if (keyboard.digit2Key.wasPressedThisFrame) combatManager.SelectSpell("lightning");
+            if (keyboard.digit3Key.wasPressedThisFrame) combatManager.SelectSpell("ice_spear");
+            if (keyboard.digit4Key.wasPressedThisFrame) combatManager.SelectSpell("shield");
+            if (keyboard.spaceKey.wasPressedThisFrame)  combatManager.OnWandCast(220);
+        }
+#else
         if (Input.GetKeyDown(KeyCode.Alpha1)) combatManager.SelectSpell("fireball");
         if (Input.GetKeyDown(KeyCode.Alpha2)) combatManager.SelectSpell("lightning");
         if (Input.GetKeyDown(KeyCode.Alpha3)) combatManager.SelectSpell("ice_spear");
         if (Input.GetKeyDown(KeyCode.Alpha4)) combatManager.SelectSpell("shield");
         if (Input.GetKeyDown(KeyCode.Space))  combatManager.OnWandCast(220);
+#endif
     }
 
     void ConnectToBroker()
