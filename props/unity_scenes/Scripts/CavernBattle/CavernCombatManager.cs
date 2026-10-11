@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -113,21 +114,29 @@ public class CavernCombatManager : MonoBehaviour
         if (playerShieldVisual != null)
             playerShieldVisual.SetActive(false);
 
-        StopVFX(fireballImpactVFX);
-        StopVFX(lightningImpactVFX);
-        StopVFX(iceSpearImpactVFX);
-        StopVFX(dragonShieldBreakVFX);
-        StopVFX(dragonAttackVFX);
+        PrepareVFX(fireballImpactVFX);
+        PrepareVFX(lightningImpactVFX);
+        PrepareVFX(iceSpearImpactVFX);
+        PrepareVFX(dragonShieldBreakVFX);
+        PrepareVFX(dragonAttackVFX);
 
         ScheduleNextDragonAttack();
         shieldTimer = dragonShieldCooldown;
         UpdateEquippedSpellUI();
     }
 
-    private void StopVFX(ParticleSystem ps)
+    private void PrepareVFX(ParticleSystem ps)
     {
         if (ps == null) return;
+        ParticleSystem[] allSystems = ps.GetComponentsInChildren<ParticleSystem>(true);
+        foreach (var sys in allSystems)
+        {
+            var main = sys.main;
+            main.loop = false;
+            main.playOnAwake = false;
+        }
         ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        ps.gameObject.SetActive(false);
     }
 
     void Update()
@@ -259,6 +268,8 @@ public class CavernCombatManager : MonoBehaviour
         }
     }
 
+    private readonly Dictionary<GameObject, Coroutine> vfxCoroutines = new Dictionary<GameObject, Coroutine>();
+
     private void PlayVFX(ParticleSystem ps)
     {
         if (ps == null) return;
@@ -272,8 +283,40 @@ public class CavernCombatManager : MonoBehaviour
             curr = curr.parent;
         }
 
+        // Programmatically force Looping off on all child ParticleSystems in the prefab
+        ParticleSystem[] allSystems = ps.GetComponentsInChildren<ParticleSystem>(true);
+        float maxDuration = ps.main.duration;
+
+        foreach (var sys in allSystems)
+        {
+            var main = sys.main;
+            main.loop = false;
+            if (main.duration > maxDuration)
+                maxDuration = main.duration;
+        }
+
         ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         ps.Play(true);
+
+        // Cancel any pending deactivation coroutine for this VFX
+        if (vfxCoroutines.TryGetValue(ps.gameObject, out Coroutine runningCoroutine))
+        {
+            if (runningCoroutine != null)
+                StopCoroutine(runningCoroutine);
+        }
+
+        // Automatically disable the GameObject once the effect has finished playing
+        vfxCoroutines[ps.gameObject] = StartCoroutine(DeactivateVFXAfterDelay(ps.gameObject, Mathf.Max(2.5f, maxDuration + 1.5f)));
+    }
+
+    private IEnumerator DeactivateVFXAfterDelay(GameObject go, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (go != null)
+        {
+            go.SetActive(false);
+        }
+        vfxCoroutines.Remove(go);
     }
 
     private void CastFireball(bool isHeavyFlick)
