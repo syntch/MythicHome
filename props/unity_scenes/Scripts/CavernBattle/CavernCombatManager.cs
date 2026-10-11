@@ -541,7 +541,22 @@ public class CavernCombatManager : MonoBehaviour
         DisableShieldVisual(dragonShieldVisual);
 
         if (dragonAnimator != null)
+        {
+            // Clear any lingering combat triggers that might compete with death
+            dragonAnimator.ResetTrigger(AttackHash);
+            dragonAnimator.ResetTrigger(ScreamHash);
+            dragonAnimator.ResetTrigger(HitLightningHash);
+            dragonAnimator.ResetTrigger(HitFireballHash);
+
             dragonAnimator.SetTrigger(DieHash);
+            // Immediately force transition into the Die animation state
+            dragonAnimator.CrossFade("Die", 0.15f);
+            Debug.Log("<color=green>[CavernCombat]</color> Dragon defeated! Die animation triggered.");
+        }
+        else
+        {
+            Debug.LogWarning("[CavernCombat] dragonAnimator is null on DragonDeath!");
+        }
 
         if (combatWarningText != null)
             combatWarningText.text = "";
