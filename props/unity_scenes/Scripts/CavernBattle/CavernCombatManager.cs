@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -114,29 +113,21 @@ public class CavernCombatManager : MonoBehaviour
         if (playerShieldVisual != null)
             playerShieldVisual.SetActive(false);
 
-        PrepareVFX(fireballImpactVFX);
-        PrepareVFX(lightningImpactVFX);
-        PrepareVFX(iceSpearImpactVFX);
-        PrepareVFX(dragonShieldBreakVFX);
-        PrepareVFX(dragonAttackVFX);
+        StopVFX(fireballImpactVFX);
+        StopVFX(lightningImpactVFX);
+        StopVFX(iceSpearImpactVFX);
+        StopVFX(dragonShieldBreakVFX);
+        StopVFX(dragonAttackVFX);
 
         ScheduleNextDragonAttack();
         shieldTimer = dragonShieldCooldown;
         UpdateEquippedSpellUI();
     }
 
-    private void PrepareVFX(ParticleSystem ps)
+    private void StopVFX(ParticleSystem ps)
     {
         if (ps == null) return;
-        ParticleSystem[] allSystems = ps.GetComponentsInChildren<ParticleSystem>(true);
-        foreach (var sys in allSystems)
-        {
-            var main = sys.main;
-            main.loop = false;
-            main.playOnAwake = false;
-        }
         ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        ps.gameObject.SetActive(false);
     }
 
     void Update()
@@ -171,9 +162,9 @@ public class CavernCombatManager : MonoBehaviour
             if (combatWarningText != null)
             {
                 string shieldStatus = IsPlayerShielded
-                    ? "<color=#00E5FF>🛡️ SHIELD READY!</color>"
-                    : "<color=#FF5252>Cast 🛡️ SHIELD Now!</color>";
-                combatWarningText.text = $"⚠️ DRAGON BREATH INCOMING ({Mathf.Max(0f, currentWindupRemaining):F1}s)!\n{shieldStatus}";
+                    ? "<color=#00E5FF><b>[SHIELD READY]</b></color>"
+                    : "<color=#FF5252><b>Cast SHIELD Now!</b></color>";
+                combatWarningText.text = $"<color=#FF5252><b>INCOMING DRAGON BREATH ({Mathf.Max(0f, currentWindupRemaining):F1}s)!</b></color>\n{shieldStatus}";
             }
 
             if (currentWindupRemaining <= 0f)
@@ -223,16 +214,16 @@ public class CavernCombatManager : MonoBehaviour
         switch (currentEquippedSpell)
         {
             case SpellType.Fireball:
-                equippedSpellText.text = "Equipped: <color=#FF6D00>🔥 FIREBALL</color> (Heavy Attack)";
+                equippedSpellText.text = "Equipped: <color=#FF6D00><b>FIREBALL</b></color> (Heavy Attack)";
                 break;
             case SpellType.Lightning:
-                equippedSpellText.text = "Equipped: <color=#FFEA00>⚡ LIGHTNING BOLT</color> (Quick Strike)";
+                equippedSpellText.text = "Equipped: <color=#FFEA00><b>LIGHTNING BOLT</b></color> (Quick Strike)";
                 break;
             case SpellType.IceSpear:
-                equippedSpellText.text = "Equipped: <color=#00E5FF>❄️ ICE SPEAR</color> (Shield Breaker)";
+                equippedSpellText.text = "Equipped: <color=#00E5FF><b>ICE SPEAR</b></color> (Shield Breaker)";
                 break;
             case SpellType.Shield:
-                equippedSpellText.text = "Equipped: <color=#69F0AE>🛡️ ARCANE SHIELD</color> (Block Attack)";
+                equippedSpellText.text = "Equipped: <color=#69F0AE><b>ARCANE SHIELD</b></color> (Block Attack)";
                 break;
         }
     }
@@ -268,8 +259,6 @@ public class CavernCombatManager : MonoBehaviour
         }
     }
 
-    private readonly Dictionary<GameObject, Coroutine> vfxCoroutines = new Dictionary<GameObject, Coroutine>();
-
     private void PlayVFX(ParticleSystem ps)
     {
         if (ps == null) return;
@@ -283,40 +272,8 @@ public class CavernCombatManager : MonoBehaviour
             curr = curr.parent;
         }
 
-        // Programmatically force Looping off on all child ParticleSystems in the prefab
-        ParticleSystem[] allSystems = ps.GetComponentsInChildren<ParticleSystem>(true);
-        float maxDuration = ps.main.duration;
-
-        foreach (var sys in allSystems)
-        {
-            var main = sys.main;
-            main.loop = false;
-            if (main.duration > maxDuration)
-                maxDuration = main.duration;
-        }
-
         ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         ps.Play(true);
-
-        // Cancel any pending deactivation coroutine for this VFX
-        if (vfxCoroutines.TryGetValue(ps.gameObject, out Coroutine runningCoroutine))
-        {
-            if (runningCoroutine != null)
-                StopCoroutine(runningCoroutine);
-        }
-
-        // Automatically disable the GameObject once the effect has finished playing
-        vfxCoroutines[ps.gameObject] = StartCoroutine(DeactivateVFXAfterDelay(ps.gameObject, Mathf.Max(2.5f, maxDuration + 1.5f)));
-    }
-
-    private IEnumerator DeactivateVFXAfterDelay(GameObject go, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (go != null)
-        {
-            go.SetActive(false);
-        }
-        vfxCoroutines.Remove(go);
     }
 
     private void CastFireball(bool isHeavyFlick)
@@ -328,7 +285,7 @@ public class CavernCombatManager : MonoBehaviour
             if (spellAudioSource != null && shieldDeflectSFX != null)
                 spellAudioSource.PlayOneShot(shieldDeflectSFX);
 
-            ShowTemporaryWarning("🛡️ Dragon's Shield deflected Fireball! Equip ❄️ ICE SPEAR to break it!", 2.5f);
+            ShowTemporaryWarning("Dragon's Shield deflected Fireball! Equip <color=#00E5FF><b>ICE SPEAR</b></color> to break it!", 2.5f);
             return;
         }
 
@@ -350,7 +307,7 @@ public class CavernCombatManager : MonoBehaviour
             if (spellAudioSource != null && shieldDeflectSFX != null)
                 spellAudioSource.PlayOneShot(shieldDeflectSFX);
 
-            ShowTemporaryWarning("🛡️ Dragon's Shield deflected Lightning! Equip ❄️ ICE SPEAR to break it!", 2.5f);
+            ShowTemporaryWarning("Dragon's Shield deflected Lightning! Equip <color=#00E5FF><b>ICE SPEAR</b></color> to break it!", 2.5f);
             return;
         }
 
@@ -378,7 +335,7 @@ public class CavernCombatManager : MonoBehaviour
             if (spellAudioSource != null && shieldShatterSFX != null)
                 spellAudioSource.PlayOneShot(shieldShatterSFX);
 
-            ShowTemporaryWarning("❄️ SHATTERED! Dragon's Shield is broken!", 2.5f);
+            ShowTemporaryWarning("<color=#00E5FF><b>SHATTERED!</b></color> Dragon's Shield is broken!", 2.5f);
         }
 
         // Ice Spear also deals 1 piercing damage
@@ -404,7 +361,7 @@ public class CavernCombatManager : MonoBehaviour
 
         if (!isDragonWindingUpAttack)
         {
-            ShowTemporaryWarning($"🛡️ Arcane Shield Raised ({playerShieldDuration:F0}s)!", 2.0f);
+            ShowTemporaryWarning($"<color=#69F0AE><b>Arcane Shield Raised ({playerShieldDuration:F0}s)!</b></color>", 2.0f);
         }
     }
 
@@ -431,7 +388,7 @@ public class CavernCombatManager : MonoBehaviour
         if (dragonAnimator != null)
             dragonAnimator.SetTrigger(ScreamHash);
 
-        ShowTemporaryWarning("🛡️ DRAGON CAST FLAME ARMOR! Select ❄️ ICE SPEAR on your phone to shatter it!", 4.0f);
+        ShowTemporaryWarning("<color=#FF5252><b>DRAGON CAST FLAME ARMOR!</b></color> Select <color=#00E5FF><b>ICE SPEAR</b></color> on phone to shatter it!", 4.0f);
     }
 
     private void StartDragonAttackWindup()
@@ -468,7 +425,7 @@ public class CavernCombatManager : MonoBehaviour
                 spellAudioSource.PlayOneShot(shieldDeflectSFX);
 
             DeactivatePlayerShield();
-            ShowTemporaryWarning("🛡️ BLOCKED! Your Arcane Shield absorbed the Dragon's breath!", 3.0f);
+            ShowTemporaryWarning("<color=#69F0AE><b>BLOCKED!</b></color> Your Arcane Shield absorbed the Dragon's breath!", 3.0f);
         }
         else
         {
@@ -486,7 +443,7 @@ public class CavernCombatManager : MonoBehaviour
             }
             else
             {
-                ShowTemporaryWarning($"💥 HIT BY DRAGON BREATH! ({currentPlayerHealth} HP Remaining)", 3.0f);
+                ShowTemporaryWarning($"<color=#FF5252><b>HIT BY DRAGON BREATH!</b></color> ({currentPlayerHealth} HP Remaining)", 3.0f);
             }
         }
     }
@@ -547,7 +504,7 @@ public class CavernCombatManager : MonoBehaviour
 
         if (victoryDefeatText != null)
         {
-            victoryDefeatText.text = "🏆 VICTORY!\n<size=60%>Flick Wand to Play Again</size>";
+            victoryDefeatText.text = "<color=#FFD700><b>VICTORY!</b></color>\n<size=60%>Flick Wand to Play Again</size>";
             victoryDefeatText.gameObject.SetActive(true);
         }
     }
@@ -562,7 +519,7 @@ public class CavernCombatManager : MonoBehaviour
 
         if (victoryDefeatText != null)
         {
-            victoryDefeatText.text = "💀 DEFEATED!\n<size=60%>Flick Wand to Try Again</size>";
+            victoryDefeatText.text = "<color=#FF5252><b>DEFEATED!</b></color>\n<size=60%>Flick Wand to Try Again</size>";
             victoryDefeatText.gameObject.SetActive(true);
         }
     }
@@ -582,7 +539,7 @@ public class CavernCombatManager : MonoBehaviour
         if (!isDragonWindingUpAttack && combatWarningText != null)
         {
             combatWarningText.text = IsDragonShielded
-                ? "🛡️ DRAGON SHIELD ACTIVE — Cast ❄️ ICE SPEAR to Shatter!"
+                ? "<color=#FF5252><b>DRAGON SHIELD ACTIVE</b></color> — Cast <color=#00E5FF><b>ICE SPEAR</b></color> to Shatter!"
                 : "";
         }
     }
