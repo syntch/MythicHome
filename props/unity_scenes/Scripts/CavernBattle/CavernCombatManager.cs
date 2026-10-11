@@ -107,11 +107,8 @@ public class CavernCombatManager : MonoBehaviour
         if (combatWarningText != null)
             combatWarningText.text = "";
 
-        if (dragonShieldVisual != null)
-            dragonShieldVisual.SetActive(false);
-
-        if (playerShieldVisual != null)
-            playerShieldVisual.SetActive(false);
+        DisableShieldVisual(dragonShieldVisual);
+        DisableShieldVisual(playerShieldVisual);
 
         StopVFX(fireballImpactVFX);
         StopVFX(lightningImpactVFX);
@@ -122,6 +119,41 @@ public class CavernCombatManager : MonoBehaviour
         ScheduleNextDragonAttack();
         shieldTimer = dragonShieldCooldown;
         UpdateEquippedSpellUI();
+    }
+
+    private void EnableShieldVisual(GameObject shieldObj)
+    {
+        if (shieldObj == null) return;
+
+        // Ensure the shield GameObject and any inactive parents are active
+        Transform curr = shieldObj.transform;
+        while (curr != null)
+        {
+            if (!curr.gameObject.activeSelf)
+                curr.gameObject.SetActive(true);
+            curr = curr.parent;
+        }
+
+        // Trigger playback on all ParticleSystems on the shield and its children
+        ParticleSystem[] systems = shieldObj.GetComponentsInChildren<ParticleSystem>(true);
+        foreach (var ps in systems)
+        {
+            ps.Play(true);
+        }
+    }
+
+    private void DisableShieldVisual(GameObject shieldObj)
+    {
+        if (shieldObj == null) return;
+
+        // Stop and clear all ParticleSystems on the shield
+        ParticleSystem[] systems = shieldObj.GetComponentsInChildren<ParticleSystem>(true);
+        foreach (var ps in systems)
+        {
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+
+        shieldObj.SetActive(false);
     }
 
     private void StopVFX(ParticleSystem ps)
@@ -330,7 +362,7 @@ public class CavernCombatManager : MonoBehaviour
         {
             // Shatter the Dragon's Shield!
             IsDragonShielded = false;
-            if (dragonShieldVisual != null) dragonShieldVisual.SetActive(false);
+            DisableShieldVisual(dragonShieldVisual);
             PlayVFX(dragonShieldBreakVFX);
             if (spellAudioSource != null && shieldShatterSFX != null)
                 spellAudioSource.PlayOneShot(shieldShatterSFX);
@@ -353,8 +385,7 @@ public class CavernCombatManager : MonoBehaviour
         IsPlayerShielded = true;
         playerShieldRemaining = playerShieldDuration;
 
-        if (playerShieldVisual != null)
-            playerShieldVisual.SetActive(true);
+        EnableShieldVisual(playerShieldVisual);
 
         if (spellAudioSource != null && shieldCastSFX != null)
             spellAudioSource.PlayOneShot(shieldCastSFX);
@@ -369,8 +400,7 @@ public class CavernCombatManager : MonoBehaviour
     {
         IsPlayerShielded = false;
         playerShieldRemaining = 0f;
-        if (playerShieldVisual != null)
-            playerShieldVisual.SetActive(false);
+        DisableShieldVisual(playerShieldVisual);
     }
 
     // =========================================================================
@@ -382,8 +412,7 @@ public class CavernCombatManager : MonoBehaviour
         if (IsDragonDead || IsDragonShielded) return;
 
         IsDragonShielded = true;
-        if (dragonShieldVisual != null)
-            dragonShieldVisual.SetActive(true);
+        EnableShieldVisual(dragonShieldVisual);
 
         if (dragonAnimator != null)
             dragonAnimator.SetTrigger(ScreamHash);
@@ -493,8 +522,7 @@ public class CavernCombatManager : MonoBehaviour
         IsDragonShielded = false;
         isDragonWindingUpAttack = false;
 
-        if (dragonShieldVisual != null)
-            dragonShieldVisual.SetActive(false);
+        DisableShieldVisual(dragonShieldVisual);
 
         if (dragonAnimator != null)
             dragonAnimator.SetTrigger(DieHash);
