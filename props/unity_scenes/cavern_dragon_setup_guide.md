@@ -40,7 +40,7 @@ On your scene's combat manager GameObject:
    * Drag your **`CavernCombatManager`** into the `Combat Manager` slot.
 
 ### Step 4: Wire the UI & Visual Elements in Inspector
-On your **Canvas** and **Dragon**, create and link the following slots in `CavernCombatManager`:
+On your **Canvas**, **Dragon**, and scene hierarchy, create and link the following slots in `CavernCombatManager`:
 
 | Inspector Field | Component Type | Purpose |
 | :--- | :--- | :--- |
@@ -49,8 +49,19 @@ On your **Canvas** and **Dragon**, create and link the following slots in `Caver
 | **`Equipped Spell Text`** | `TextMeshProUGUI` | Displays the currently selected phone spell (e.g., `Equipped: ❄️ ICE SPEAR`). |
 | **`Combat Warning Text`** | `TextMeshProUGUI` | Center-screen banner showing Dragon Shield alerts and incoming Dragon Breath countdowns (`4.8s`). |
 | **`Victory Defeat Text`** | `TextMeshProUGUI` | Existing Victory text object (automatically shows either `🏆 VICTORY!` or `💀 DEFEATED!`). |
-| **`Dragon Shield Visual`** | `GameObject` | A glowing sphere/aura ParticleSystem childed to the Dragon (starts inactive; turns on when Dragon shields). |
-| **`Player Shield Visual`** | `GameObject` | A semi-transparent green/cyan UI Panel or 3D barrier in front of the camera (turns on when Player casts Shield). |
+| **`Dragon Shield Visual`** | `GameObject` | Persistent glowing sphere/aura childed to the Dragon (active while shielded). |
+| **`Dragon Shield Break VFX`** | `ParticleSystem` | Burst effect played when Ice Spear shatters the Dragon's shield. |
+| **`Player Shield Visual`** | `GameObject` | Persistent semi-transparent barrier in front of the camera (active while player shield is raised). |
+| **`Fireball Impact VFX`** | `ParticleSystem` | Flame explosion burst positioned at the Dragon's chest/head. |
+| **`Lightning Impact VFX`** | `ParticleSystem` | Electric spark burst positioned at the Dragon's chest/head. |
+| **`Ice Spear Impact VFX`** | `ParticleSystem` | Frost impact burst positioned at the Dragon's chest/head. |
+| **`Dragon Attack VFX`** | `ParticleSystem` | Fire breath or claw wave burst originating from the Dragon's mouth towards the camera. |
+
+> [!TIP]
+> **VFX Prefab Configuration Tips:**
+> 1. **`Play On Awake`:** Ensure this is **unchecked** on all impact particle systems so they do not burst on scene load.
+> 2. **`Looping`:** Ensure this is **unchecked** on impact particle systems (Fireball, Lightning, Ice Spear, Shield Break) so they play once per spell cast.
+> 3. **Disabled GameObjects:** You can leave the VFX GameObjects disabled in your scene hierarchy. `CavernCombatManager` automatically activates the GameObject hierarchy and triggers child particle systems (`Play(true)`) upon each cast.
 
 ### Step 5: Dragon Animator Trigger Check
 Ensure your Dragon's **Animator Controller** has an **`AttackTrigger`** parameter wired to a fire-breath or claw-swipe animation state (in addition to your existing `DieTrigger`, `ScreamTrigger`, `HitLightning`, and `HitFireball` triggers).
