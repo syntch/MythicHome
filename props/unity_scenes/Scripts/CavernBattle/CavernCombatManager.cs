@@ -84,6 +84,19 @@ public class CavernCombatManager : MonoBehaviour
 
     public bool IsMatchOver => IsDragonDead || IsPlayerDead;
 
+    void Awake()
+    {
+        // Immediately clear any serialized placeholder or emoji text so TextMeshPro doesn't warn on scene load
+        if (victoryDefeatText != null)
+        {
+            victoryDefeatText.text = "";
+            victoryDefeatText.gameObject.SetActive(false);
+        }
+
+        if (combatWarningText != null)
+            combatWarningText.text = "";
+    }
+
     void Start()
     {
         currentDragonHealth = maxDragonHealth;
@@ -102,7 +115,10 @@ public class CavernCombatManager : MonoBehaviour
         }
 
         if (victoryDefeatText != null)
+        {
+            victoryDefeatText.text = "";
             victoryDefeatText.gameObject.SetActive(false);
+        }
 
         if (combatWarningText != null)
             combatWarningText.text = "";
